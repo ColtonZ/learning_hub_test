@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "71914723051",
+    "firebase_url": "https://learning-hub-ec86d.firebaseio.com",
+    "project_id": "learning-hub-ec86d",
+    "storage_bucket": "learning-hub-ec86d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71914723051:android:91374da6d4ce41f8bb90ae",
+        "android_client_info": {
+          "package_name": "com.coltonz.learninghub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71914723051-8siujtuuhkc3ass4r2flkmiarfjvuc0u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coltonz.learninghub",
+            "certificate_hash": "aafa1c8d082c57cf196bd4320736d852dcd3aa97"
+          }
+        },
+        {
+          "client_id": "71914723051-b92jglm2gudk760uj38kpq63qu16dlaa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKxbj4lg7DUgrdQYaLvkxYqbg3atBjP-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71914723051-b92jglm2gudk760uj38kpq63qu16dlaa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
