@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:71914723051:android:91374da6d4ce41f8bb90ae",
         "android_client_info": {
-          "package_name": "com.coltonz.learninghub"
+          "package_name": "com.coltonz.learning_hub"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "71914723051-8siujtuuhkc3ass4r2flkmiarfjvuc0u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.coltonz.learninghub",
+            "package_name": "com.coltonz.learning_hub",
             "certificate_hash": "aafa1c8d082c57cf196bd4320736d852dcd3aa97"
           }
         },

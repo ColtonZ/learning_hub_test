@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'classroom.dart';
+import 'dart:async';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  Future<String> getData() async {
+    http.Response response = await http.get(
+        Uri.encodeFull("https://classroom.googleapis.com/v1/courses"),
+        headers: {
+          "key": "AIzaSyBZ5izrPKmflMeDuGiJbZ0eudN1FD3OU1o",
+          "Accept": "application/json"
+        });
+
+    print(response.body);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +31,7 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               MaterialButton(
-                onPressed: () => getData,
+                onPressed: getData,
                 color: Colors.white,
                 textColor: Colors.black,
                 child: Text('Get Data'),
