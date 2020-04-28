@@ -1,4 +1,4 @@
-package com.example.learning_hub
+package com.coltonz.learning_hub
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

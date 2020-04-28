@@ -5,8 +5,9 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
 Future<String> signInWithGoogle() async {
-  GoogleSignIn _googleSignIn = GoogleSignIn();
-  await _googleSignIn.signIn();
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: ['profile', 'email', "https://www.googleapis.com/auth/classroom.courses", "https://www.googleapis.com/auth/classroom.courses.readonly"],
+  );
+  final GoogleSignInAccount account = await _googleSignIn.signIn();
+  print("Account details: $account");
 }
-
-//https://medium.com/flutter-community/flutter-sign-in-with-google-in-android-without-firebase-a91b977d166f
