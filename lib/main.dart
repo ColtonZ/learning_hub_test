@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'sign_in.dart';
-import 'dart:async';
-import 'package:http/http.dart' as http;
-import 'package:firebase_auth/firebase_auth.dart';
+import 'backend.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,13 +18,13 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               MaterialButton(
-                onPressed: getData,
+                onPressed: signOut,
                 color: Colors.white,
                 textColor: Colors.black,
                 child: Text('Get Data'),
               ),
               MaterialButton(
-                onPressed: null,
+                onPressed: signIn,
                 color: Colors.red,
                 textColor: Colors.black,
                 child: Text('Sign In'),
