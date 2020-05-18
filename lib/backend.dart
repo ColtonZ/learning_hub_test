@@ -9,7 +9,7 @@ import 'package:learning_hub/course.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
-Future<Map<String, String>> signIn() async {
+Future<GoogleSignInAccount> signIn() async {
   GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'profile',
@@ -22,22 +22,31 @@ Future<Map<String, String>> signIn() async {
     ],
   );
   final GoogleSignInAccount account = await _googleSignIn.signIn();
+
+  return account;
+}
+
+Future<Map<String, String>> getHeaders(GoogleSignInAccount account) async {
   final Map<String, String> headers = await account.authHeaders;
 
   return headers;
 }
 
-Future<List<Course>> signInAndGetCourses() async {
-  Map<String, String> headers = await signIn();
+Future<List<Course>> getCourses(GoogleSignInAccount account) async {
+  Map<String, String> headers;
 
-  final List<Course> courses = await getCourses(headers);
+  if (isSignedIn(account)) {
+    headers = await getHeaders(account);
+  } else {
+    headers = await getHeaders(await signIn());
+  }
 
-  courses.forEach((element) => print(element.name));
+  final List<Course> courses = await sendCourseRequest(headers);
 
   return courses;
 }
 
-Future<List<Course>> getCourses(Map<String, String> headers) async {
+Future<List<Course>> sendCourseRequest(Map<String, String> headers) async {
   http.Response response = await http.get(
       Uri.encodeFull("https://classroom.googleapis.com/v1/courses"),
       headers: headers);
@@ -66,17 +75,29 @@ List<Course> parseCourses(String responseBody) {
   return courseList;
 }
 
-Future<List<Assignment>> getAssignments(String id) async {
-  Map<String, String> headers = await signIn();
+Future<List<Assignment>> getAssignments(
+    String id, GoogleSignInAccount account) async {
+  Map<String, String> headers;
 
+  if (isSignedIn(account)) {
+    headers = await getHeaders(account);
+  } else {
+    headers = await getHeaders(await signIn());
+  }
+
+  final List<Assignment> assignments = await sendAssignmentRequest(id, headers);
+
+  return assignments;
+}
+
+Future<List<Assignment>> sendAssignmentRequest(
+    String id, Map<String, String> headers) async {
   http.Response response = await http.get(
       Uri.encodeFull(
           "https://classroom.googleapis.com//v1/courses/$id/courseWork"),
       headers: headers);
 
   final responseBody = response.body;
-
-  print(responseBody);
 
   return compute(parseAssignments, responseBody);
 }
@@ -88,7 +109,6 @@ List<Assignment> parseAssignments(String responseBody) {
 
   assignments.forEach((details) {
     Assignment assignment = Assignment.fromJson(details);
-    print("$details");
     assignment.output();
     assignmentList.add(assignment);
   });
@@ -98,6 +118,18 @@ List<Assignment> parseAssignments(String responseBody) {
   return assignmentList;
 }
 
-void signOut() async {
+bool isSignedIn(GoogleSignInAccount account) {
+  bool signedIn = true;
+  try {
+    String email = account.email;
+  } catch (e) {
+    print(e);
+    signedIn = false;
+  }
+  return signedIn;
+}
+
+Future<GoogleSignInAccount> signOut() async {
   googleSignIn.signOut();
+  return null;
 }

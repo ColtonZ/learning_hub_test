@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:learning_hub/course.dart';
 import 'package:learning_hub/assignments_page.dart';
+import 'package:learning_hub/home_page.dart';
 import 'backend.dart';
 
 class CoursesPage extends StatefulWidget {
+  final GoogleSignInAccount account;
+
+  CoursesPage({this.account});
+
   @override
   CoursesPageState createState() => CoursesPageState();
 }
@@ -19,7 +25,6 @@ class CoursesPageState extends State<CoursesPage> {
         padding: const EdgeInsets.all(16.0),
         itemBuilder: (context, item) {
           if (item.isOdd) return Divider();
-          print(item);
           final index = item ~/ 2;
 
           return _buildCourseRow(courses[index]);
@@ -51,36 +56,24 @@ class CoursesPageState extends State<CoursesPage> {
       MaterialPageRoute(
           builder: (BuildContext context) => AssignmentsPage(
                 course: course,
+                account: widget.account,
               )),
     );
   }
 
-  void _pushSignInScreen() {
+  void _pushHomePage(GoogleSignInAccount account) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (BuildContext context) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("Sign In"),
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.class_),
-                  onPressed: () {
-                    signIn();
-                    return CoursesPageState;
-                  },
-                ),
-              ],
-            ),
-            body: Text("Sign In!"),
-          );
-        },
-      ),
+          builder: (BuildContext context) => HomePage(
+                account: account,
+              )),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    GoogleSignInAccount account = widget.account;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Courses"),
@@ -88,14 +81,16 @@ class CoursesPageState extends State<CoursesPage> {
           IconButton(
             icon: Icon(Icons.power_settings_new),
             onPressed: () {
-              signOut();
-              _pushSignInScreen();
+              if (isSignedIn(account)) {
+                signOut();
+              }
+              _pushHomePage(account);
             },
           ),
         ],
       ),
       body: FutureBuilder(
-          future: signInAndGetCourses(),
+          future: getCourses(account),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               return _buildCourseList(snapshot.data);
