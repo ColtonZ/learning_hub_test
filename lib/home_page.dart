@@ -75,7 +75,7 @@ class HomePageState extends State<HomePage> {
                           account.photoUrl,
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.width * 0.1,
+                          height: 10,
                         ),
                         RaisedButton(
                           onPressed: () => _pushCoursesPage(account),

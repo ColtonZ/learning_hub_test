@@ -44,6 +44,11 @@ class AssignmentsPageState extends State<AssignmentsPage> {
             fontSize: 18.0,
           ),
         ),
+        subtitle: Text(
+          assignment.description != null
+              ? assignment.description
+              : "This task has no description",
+        ),
         onTap: () {
           setState(() {
             //_currentAssignment = assignment;

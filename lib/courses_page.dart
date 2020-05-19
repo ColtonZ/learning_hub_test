@@ -43,6 +43,9 @@ class CoursesPageState extends State<CoursesPage> {
             fontSize: 18.0,
           ),
         ),
+        subtitle: Text(
+          course.description == course.name ? "" : course.description,
+        ),
         onTap: () {
           setState(() {
             _currentCourse = course;
