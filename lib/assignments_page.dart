@@ -46,7 +46,17 @@ class AssignmentsPageState extends State<AssignmentsPage> {
         ),
         subtitle: Text(
           assignment.description != null
-              ? assignment.description
+              ? assignment.description.split("\n").length > 1
+                  ? assignment.description.split("\n")[0].length > 40
+                      ? assignment.description
+                              .split("\n")[0]
+                              .substring(0, 40)
+                              .trim() +
+                          "..."
+                      : assignment.description.split("\n")[0].trim() + "..."
+                  : assignment.description.length > 40
+                      ? assignment.description.substring(0, 40).trim() + "..."
+                      : assignment.description.trim()
               : "This task has no description",
         ),
         onTap: () {
@@ -72,7 +82,7 @@ class AssignmentsPageState extends State<AssignmentsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Assignments"),
+        title: Text("Assignments for ${course.name}"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.person),
@@ -88,7 +98,9 @@ class AssignmentsPageState extends State<AssignmentsPage> {
             if (snapshot.connectionState == ConnectionState.done) {
               return _buildAssignmentList(snapshot.data);
             } else {
-              return CircularProgressIndicator();
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             }
           }),
     );

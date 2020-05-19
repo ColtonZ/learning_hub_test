@@ -30,7 +30,7 @@ class HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        title: Text("Your Account"),
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.swap_horiz),

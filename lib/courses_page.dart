@@ -79,7 +79,7 @@ class CoursesPageState extends State<CoursesPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Courses"),
+        title: Text("Your Courses"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.person),
@@ -98,7 +98,9 @@ class CoursesPageState extends State<CoursesPage> {
             if (snapshot.connectionState == ConnectionState.done) {
               return _buildCourseList(snapshot.data);
             } else {
-              return CircularProgressIndicator();
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             }
           }),
     );
