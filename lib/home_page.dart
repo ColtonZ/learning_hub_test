@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:learning_hub/courses_page.dart';
 import 'backend.dart';
@@ -43,7 +42,7 @@ class HomePageState extends State<HomePage> {
               }),
         ],
       ),
-      body: isSignedIn(account)
+      body: account != null
           ? Text("Signed in!")
           : FutureBuilder(
               future: signIn(),
@@ -53,10 +52,34 @@ class HomePageState extends State<HomePage> {
                   return Center(
                     child: Column(
                       children: <Widget>[
-                        Text("Account Name: ${account.displayName}"),
-                        Image.network(account.photoUrl),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.width * 0.05,
+                        ),
+                        Text(
+                          "Account Name:",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "${account.displayName}",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w400),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Image.network(
+                          account.photoUrl,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.width * 0.1,
+                        ),
                         RaisedButton(
                           onPressed: () => _pushCoursesPage(account),
+                          child: Text("View your courses"),
                         )
                       ],
                     ),

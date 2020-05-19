@@ -70,11 +70,8 @@ class AssignmentsPageState extends State<AssignmentsPage> {
         title: Text("Assignments"),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.power_settings_new),
+            icon: Icon(Icons.person),
             onPressed: () {
-              if (isSignedIn(account)) {
-                signOut();
-              }
               _pushHomePage(account);
             },
           ),

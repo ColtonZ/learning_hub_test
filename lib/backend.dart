@@ -119,14 +119,11 @@ List<Assignment> parseAssignments(String responseBody) {
 }
 
 bool isSignedIn(GoogleSignInAccount account) {
-  bool signedIn = true;
-  try {
-    String email = account.email;
-  } catch (e) {
-    print(e);
-    signedIn = false;
+  if (account != null) {
+    return true;
+  } else {
+    return false;
   }
-  return signedIn;
 }
 
 Future<GoogleSignInAccount> signOut() async {

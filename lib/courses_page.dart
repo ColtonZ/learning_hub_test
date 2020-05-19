@@ -79,7 +79,7 @@ class CoursesPageState extends State<CoursesPage> {
         title: Text("Courses"),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.power_settings_new),
+            icon: Icon(Icons.person),
             onPressed: () {
               if (isSignedIn(account)) {
                 signOut();
