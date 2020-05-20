@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:learning_hub/assignment.dart';
 import 'package:learning_hub/course.dart';
+import 'assignment_material.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -63,14 +64,10 @@ List<Course> parseCourses(String responseBody) {
 
   courses.forEach((details) {
     Course course = Course.fromJson(details);
-    print("$details");
-    course.output();
     if (course.status == "ACTIVE") {
       courseList.add(course);
     }
   });
-
-  courseList.forEach((course) {});
 
   return courseList;
 }
@@ -78,15 +75,12 @@ List<Course> parseCourses(String responseBody) {
 Future<List<Assignment>> getAssignments(
     String id, GoogleSignInAccount account) async {
   Map<String, String> headers;
-
   if (isSignedIn(account)) {
     headers = await getHeaders(account);
   } else {
     headers = await getHeaders(await signIn());
   }
-
   final List<Assignment> assignments = await sendAssignmentRequest(id, headers);
-
   return assignments;
 }
 
@@ -98,7 +92,6 @@ Future<List<Assignment>> sendAssignmentRequest(
       headers: headers);
 
   final responseBody = response.body;
-
   return compute(parseAssignments, responseBody);
 }
 
@@ -109,13 +102,24 @@ List<Assignment> parseAssignments(String responseBody) {
 
   assignments.forEach((details) {
     Assignment assignment = Assignment.fromJson(details);
-    assignment.output();
     assignmentList.add(assignment);
+    assignment.output();
   });
 
-  assignmentList.forEach((course) {});
-
   return assignmentList;
+}
+
+List<Material> getMaterials(String responseBody) {
+  var data = json.decode(responseBody);
+  var materials = data["materials"] as List;
+  var materialsList = <Material>[];
+
+  materials.forEach((details) {
+    Material material = Material.fromJson(details);
+    materialsList.add(material);
+  });
+
+  return materialsList;
 }
 
 bool isSignedIn(GoogleSignInAccount account) {
@@ -129,4 +133,9 @@ bool isSignedIn(GoogleSignInAccount account) {
 Future<GoogleSignInAccount> signOut() async {
   googleSignIn.signOut();
   return null;
+}
+
+void printWrapped(String text) {
+  final pattern = RegExp('.{1,800}'); // 800 is the size of each chunk
+  pattern.allMatches(text).forEach((match) => print(match.group(0)));
 }

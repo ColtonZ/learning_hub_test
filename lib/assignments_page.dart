@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:learning_hub/assignment.dart';
 import 'package:learning_hub/course.dart';
 import 'package:learning_hub/home_page.dart';
+import 'assignment_page.dart';
 import 'backend.dart';
 
 class AssignmentsPage extends StatefulWidget {
@@ -19,7 +20,8 @@ class AssignmentsPage extends StatefulWidget {
 class AssignmentsPageState extends State<AssignmentsPage> {
   //Assignment _currentAssignment;
 
-  Widget _buildAssignmentList(List<Assignment> assignments) {
+  Widget _buildAssignmentList(
+      GoogleSignInAccount account, List<Assignment> assignments) {
     try {
       return ListView.builder(
         itemCount: (assignments.length * 2) - 1,
@@ -27,8 +29,9 @@ class AssignmentsPageState extends State<AssignmentsPage> {
         itemBuilder: (context, item) {
           if (item.isOdd) return Divider();
           final index = item ~/ 2;
-
-          return _buildAssignmentRow(assignments[index]);
+          print("assignments length: ${assignments.length}");
+          assignments[index].output();
+          return _buildAssignmentRow(account, assignments[index]);
         },
       );
     } on NoSuchMethodError {
@@ -36,10 +39,11 @@ class AssignmentsPageState extends State<AssignmentsPage> {
     }
   }
 
-  Widget _buildAssignmentRow(Assignment assignment) {
+  Widget _buildAssignmentRow(
+      GoogleSignInAccount account, Assignment assignment) {
     return ListTile(
         title: Text(
-          assignment.title,
+          assignment.title != null ? assignment.title : "N/A",
           style: TextStyle(
             fontSize: 18.0,
           ),
@@ -60,9 +64,7 @@ class AssignmentsPageState extends State<AssignmentsPage> {
               : "This task has no description",
         ),
         onTap: () {
-          setState(() {
-            //_currentAssignment = assignment;
-          });
+          _viewAssignment(account, assignment);
         });
   }
 
@@ -71,6 +73,16 @@ class AssignmentsPageState extends State<AssignmentsPage> {
       MaterialPageRoute(
           builder: (BuildContext context) => HomePage(
                 account: account,
+              )),
+    );
+  }
+
+  void _viewAssignment(GoogleSignInAccount account, Assignment assignment) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (BuildContext context) => AssignmentPage(
+                account: account,
+                assignment: assignment,
               )),
     );
   }
@@ -96,7 +108,7 @@ class AssignmentsPageState extends State<AssignmentsPage> {
           future: getAssignments(course.id, account),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return _buildAssignmentList(snapshot.data);
+              return _buildAssignmentList(account, snapshot.data);
             } else {
               return Center(
                 child: CircularProgressIndicator(),
