@@ -92,6 +92,7 @@ Future<List<Assignment>> sendAssignmentRequest(
       headers: headers);
 
   final responseBody = response.body;
+  printWrapped(responseBody);
   return compute(parseAssignments, responseBody);
 }
 

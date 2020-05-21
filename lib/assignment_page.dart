@@ -44,7 +44,37 @@ class AssignmentPageState extends State<AssignmentPage> {
           ),
         ],
       ),
-      body: Text("${assignment.title}\n\n${assignment.description}"),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: Text(
+                "${assignment.title}",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: Divider(
+                color: Colors.black,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: Text(
+                "${assignment.description}",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -25,7 +25,7 @@ class Assignment {
       title: json["title"],
       description: json["description"],
       status: json["state"],
-      type: json["WorkType"],
+      type: json["workType"],
       //materials: json["materials"],
     );
   }

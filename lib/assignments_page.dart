@@ -29,8 +29,7 @@ class AssignmentsPageState extends State<AssignmentsPage> {
         itemBuilder: (context, item) {
           if (item.isOdd) return Divider();
           final index = item ~/ 2;
-          print("assignments length: ${assignments.length}");
-          assignments[index].output();
+
           return _buildAssignmentRow(account, assignments[index]);
         },
       );
@@ -48,21 +47,29 @@ class AssignmentsPageState extends State<AssignmentsPage> {
             fontSize: 18.0,
           ),
         ),
-        subtitle: Text(
-          assignment.description != null
-              ? assignment.description.split("\n").length > 1
-                  ? assignment.description.split("\n")[0].length > 40
-                      ? assignment.description
-                              .split("\n")[0]
-                              .substring(0, 40)
-                              .trim() +
-                          "..."
-                      : assignment.description.split("\n")[0].trim() + "..."
-                  : assignment.description.length > 40
-                      ? assignment.description.substring(0, 40).trim() + "..."
-                      : assignment.description.trim()
-              : "This task has no description",
-        ),
+        subtitle: Text((assignment.description != null
+                ? assignment.description.split("\n").length > 1
+                    ? assignment.description.split("\n")[0].length > 40
+                        ? assignment.description
+                                .split("\n")[0]
+                                .substring(0, 40)
+                                .trim() +
+                            "..."
+                        : assignment.description.split("\n")[0].trim() + "..."
+                    : assignment.description.length > 40
+                        ? assignment.description.substring(0, 40).trim() + "..."
+                        : assignment.description.trim()
+                : "This task has no description") +
+            "\nType: ${assignment.type == "ASSIGNMENT" ? "Assignment" : assignment.type == "SHORT_ANSWER_QUESTION" ? "Short Answer Question" : assignment.type == "MULTIPLE_CHOICE_QUESTION" ? "Multiple Choice Question" : assignment.type}"),
+        trailing: Icon(assignment.type == "ASSIGNMENT"
+            ? Icons.assignment
+            : assignment.type == "SHORT_ANSWER_QUESTION"
+                ? Icons.short_text
+                : assignment.type == "MULTIPLE_CHOICE_QUESTION"
+                    ? Icons.check_circle_outline
+                    : Icons.warning),
+        isThreeLine: true,
+        leading: null,
         onTap: () {
           _viewAssignment(account, assignment);
         });
