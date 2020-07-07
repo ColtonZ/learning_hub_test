@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learning_hub/home_page.dart';
+import 'package:learning_hub_test/home_page.dart';
 
 void main() => runApp(MyApp());
 

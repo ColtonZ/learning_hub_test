@@ -1,4 +1,4 @@
-name: learning_hub
+name: learning_hub_test
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -86,6 +86,53 @@ flutter:
          - asset: fonts/Cabin/Cabin-SemiBoldItalic.ttf
            style: italic
            weight: 600
+     - family: Raleway
+       fonts:
+         - asset: fonts/Raleway/Raleway-Black.ttf
+           weight: 900
+         - asset: fonts/Raleway/Raleway-BlackItalic.ttf
+           style: italic
+           weight: 900
+         - asset: fonts/Raleway/Raleway-Bold.ttf
+           weight: 700
+         - asset: fonts/Raleway/Raleway-BoldItalic.ttf
+           style: italic
+           weight: 700
+         - asset: fonts/Raleway/Raleway-ExtraBold.ttf
+           weight: 800
+         - asset: fonts/Raleway/Raleway-ExtraBoldItalic.ttf
+           weight: 800
+           style: italic
+         - asset: fonts/Raleway/Raleway-ExtraLight.ttf
+           weight: 200
+         - asset: fonts/Raleway/Raleway-ExtraLightItalic.ttf
+           weight: 200
+           style: italic
+         - asset: fonts/Raleway/Raleway-Light.ttf
+           weight: 300
+         - asset: fonts/Raleway/Raleway-Italic.ttf
+           weight: 400
+           style: italic
+         - asset: fonts/Raleway/Raleway-LightItalic.ttf
+           weight: 300
+           style: italic
+         - asset: fonts/Raleway/Raleway-Medium.ttf
+           weight: 500
+         - asset: fonts/Raleway/Raleway-MediumItalic.ttf
+           weight: 500
+           style: italic
+         - asset: fonts/Raleway/Raleway-Regular.ttf
+           weight: 400
+         - asset: fonts/Raleway/Raleway-SemiBold.ttf
+           weight: 600
+         - asset: fonts/Raleway/Raleway-SemiBoldItalic.ttf
+           style: italic
+           weight: 600
+         - asset: fonts/Raleway/Raleway-Thin.ttf
+           weight: 100
+         - asset: fonts/Raleway/Raleway-ThinItalic.ttf
+           style: italic
+           weight: 100                          
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

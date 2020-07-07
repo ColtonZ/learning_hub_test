@@ -34,7 +34,10 @@ class AssignmentPageState extends State<AssignmentPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Your Assignment"),
+        title: Text(
+          "Your Assignment",
+          textAlign: TextAlign.center,
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.person),
@@ -47,33 +50,33 @@ class AssignmentPageState extends State<AssignmentPage> {
       body: Center(
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 10,
-            ),
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
               child: Text(
                 "${assignment.title}",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24),
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
               child: Divider(
                 color: Colors.black,
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Text(
                 "${assignment.description}",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                style: TextStyle(fontFamily: 'Raleway'),
               ),
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.cloud_upload),
+        backgroundColor: Colors.purpleAccent[900],
       ),
     );
   }

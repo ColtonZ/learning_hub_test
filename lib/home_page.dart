@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:learning_hub/courses_page.dart';
+import 'package:learning_hub_test/courses_page.dart';
 import 'backend.dart';
 
 class HomePage extends StatefulWidget {
@@ -51,10 +51,8 @@ class HomePageState extends State<HomePage> {
                   account = snapshot.data;
                   return Center(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(
-                          height: MediaQuery.of(context).size.width * 0.05,
-                        ),
                         Text(
                           "Account Name:",
                           style: TextStyle(
@@ -66,13 +64,16 @@ class HomePageState extends State<HomePage> {
                         Text(
                           "${account.displayName}",
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w400),
+                              fontSize: 38, fontWeight: FontWeight.w400),
                         ),
                         SizedBox(
                           height: 10,
                         ),
-                        Image.network(
-                          account.photoUrl,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.network(
+                            account.photoUrl,
+                          ),
                         ),
                         SizedBox(
                           height: 10,

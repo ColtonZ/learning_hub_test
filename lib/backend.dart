@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:learning_hub/assignment.dart';
-import 'package:learning_hub/course.dart';
+import 'package:learning_hub_test/assignment.dart';
+import 'package:learning_hub_test/course.dart';
 import 'assignment_material.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();

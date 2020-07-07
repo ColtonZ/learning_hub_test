@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:learning_hub/assignment.dart';
-import 'package:learning_hub/course.dart';
-import 'package:learning_hub/home_page.dart';
+import 'package:learning_hub_test/assignment.dart';
+import 'package:learning_hub_test/course.dart';
+import 'package:learning_hub_test/home_page.dart';
 import 'assignment_page.dart';
 import 'backend.dart';
 
@@ -34,7 +34,14 @@ class AssignmentsPageState extends State<AssignmentsPage> {
         },
       );
     } on NoSuchMethodError {
-      return Text("You have no assignments available.");
+      return Center(
+        child: Text(
+          "You have no assignments available.",
+          style: TextStyle(
+            fontFamily: 'Raleway',
+          ),
+        ),
+      );
     }
   }
 
@@ -47,20 +54,26 @@ class AssignmentsPageState extends State<AssignmentsPage> {
             fontSize: 18.0,
           ),
         ),
-        subtitle: Text((assignment.description != null
-                ? assignment.description.split("\n").length > 1
-                    ? assignment.description.split("\n")[0].length > 40
-                        ? assignment.description
-                                .split("\n")[0]
-                                .substring(0, 40)
-                                .trim() +
-                            "..."
-                        : assignment.description.split("\n")[0].trim() + "..."
-                    : assignment.description.length > 40
-                        ? assignment.description.substring(0, 40).trim() + "..."
-                        : assignment.description.trim()
-                : "This task has no description") +
-            "\nType: ${assignment.type == "ASSIGNMENT" ? "Assignment" : assignment.type == "SHORT_ANSWER_QUESTION" ? "Short Answer Question" : assignment.type == "MULTIPLE_CHOICE_QUESTION" ? "Multiple Choice Question" : assignment.type}"),
+        subtitle: Text(
+          (assignment.description != null
+                  ? assignment.description.split("\n").length > 1
+                      ? assignment.description.split("\n")[0].length > 40
+                          ? assignment.description
+                                  .split("\n")[0]
+                                  .substring(0, 40)
+                                  .trim() +
+                              "..."
+                          : assignment.description.split("\n")[0].trim() + "..."
+                      : assignment.description.length > 40
+                          ? assignment.description.substring(0, 40).trim() +
+                              "..."
+                          : assignment.description.trim()
+                  : "This task has no description") +
+              "\nType: ${assignment.type == "ASSIGNMENT" ? "Assignment" : assignment.type == "SHORT_ANSWER_QUESTION" ? "Short Answer Question" : assignment.type == "MULTIPLE_CHOICE_QUESTION" ? "Multiple Choice Question" : assignment.type}",
+          style: TextStyle(
+            fontFamily: 'Raleway',
+          ),
+        ),
         trailing: Icon(assignment.type == "ASSIGNMENT"
             ? Icons.assignment
             : assignment.type == "SHORT_ANSWER_QUESTION"
@@ -101,7 +114,10 @@ class AssignmentsPageState extends State<AssignmentsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Assignments for ${course.name}"),
+        title: Text(
+          "Assignments for ${course.name}",
+          textAlign: TextAlign.center,
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.person),

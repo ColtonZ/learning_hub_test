@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:learning_hub/course.dart';
-import 'package:learning_hub/assignments_page.dart';
-import 'package:learning_hub/home_page.dart';
+import 'package:learning_hub_test/course.dart';
+import 'package:learning_hub_test/assignments_page.dart';
+import 'package:learning_hub_test/home_page.dart';
 import 'backend.dart';
 
 class CoursesPage extends StatefulWidget {
@@ -31,7 +31,14 @@ class CoursesPageState extends State<CoursesPage> {
         },
       );
     } on NoSuchMethodError {
-      return Text("You have no courses available.");
+      return Center(
+        child: Text(
+          "You have no courses available.",
+          style: TextStyle(
+            fontFamily: 'Raleway',
+          ),
+        ),
+      );
     }
   }
 
@@ -44,7 +51,10 @@ class CoursesPageState extends State<CoursesPage> {
           ),
         ),
         subtitle: Text(
-          course.description == course.name ? "" : course.description,
+          course.description,
+          style: TextStyle(
+            fontFamily: 'Raleway',
+          ),
         ),
         onTap: () {
           setState(() {
@@ -79,7 +89,10 @@ class CoursesPageState extends State<CoursesPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Your Courses"),
+        title: Text(
+          "Your Courses",
+          textAlign: TextAlign.center,
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.person),
